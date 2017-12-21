@@ -6,7 +6,7 @@ describe("Thermostat", function() {
   });
 
   it("defaults to 20 degrees", function() {
-    expect(thermostat.temp).toEqual(20)
+    expect(thermostat.temp).toEqual(DEFAULT_TEMPERATURE)
   });
 
   it("increases the temperature with an up function", function() {
@@ -21,12 +21,12 @@ describe("Thermostat", function() {
 
   it("can't go below the minimum temperature", function() {
     thermostat.down(11);
-    expect(thermostat.temp).toEqual(10);
+    expect(thermostat.temp).toEqual(MIN_TEMPERATURE);
   });
 
   it("can't go over the max temperature", function() {
     thermostat.up(6);
-    expect(thermostat.temp).toEqual(25);
+    expect(thermostat.temp).toEqual(POWERSAVE_MAX_TEMP);
   });
 
   it("powersave mode can change the max temp", function() {
@@ -37,7 +37,14 @@ describe("Thermostat", function() {
   it("can reset temperature", function() {
     thermostat.up(1)
     thermostat.resetTemp()
-    expect(thermostat.temp).toEqual(20)
+    expect(thermostat.temp).toEqual(DEFAULT_TEMPERATURE)
+  })
+
+  it("ensures powersave max temp is not exceeded when powersave is switched on", function() {
+    thermostat.powerSaveOff()
+    thermostat.up(10)
+    thermostat.powerSaveOn()
+    expect(thermostat.temp).toEqual(POWERSAVE_MAX_TEMP)
   })
 
   describe("outputs energy usage", function() {
