@@ -24,3 +24,18 @@ Thermostat.prototype.down = function(degrees) {
     this.temp -= degrees;
   }
 }
+
+Thermostat.prototype.powerSaveOn = function() {
+  this.powerSave = true;
+  this.adjustMaxTemp();
+};
+
+Thermostat.prototype.powerSaveOff = function() {
+  this.powerSave = false;
+  this.adjustMaxTemp();
+};
+
+Thermostat.prototype.adjustMaxTemp = function() {
+  this.maxTemp = this.powerSave ? POWERSAVE_MAX_TEMP : 
+  STANDARD_MAX_TEMP;
+};

@@ -27,5 +27,10 @@ describe("Thermostat", function() {
   it("can't go over the max temperature", function() {
     thermostat.up(6);
     expect(thermostat.temp).toEqual(25);
+  });
+
+  it("powersave mode can change the max temp", function() {
+    thermostat.powerSaveOff();
+    expect(thermostat.maxTemp).toEqual(32);
   })
 })
