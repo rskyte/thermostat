@@ -33,4 +33,24 @@ describe("Thermostat", function() {
     thermostat.powerSaveOff();
     expect(thermostat.maxTemp).toEqual(32);
   })
+
+  it("can reset temperature", function() {
+    thermostat.up(1)
+    thermostat.resetTemp()
+    expect(thermostat.temp).toEqual(20)
+  })
+
+  describe("outputs energy usage", function() {
+    it("low usage", function() {
+      thermostat.down(3)
+      expect(thermostat.energyUsage()).toEqual("Low-usage")
+    })
+    it("medium usage", function() {
+      expect(thermostat.energyUsage()).toEqual("Medium-usage")
+    })
+    it("high usage", function() {
+      thermostat.up(5)
+      expect(thermostat.energyUsage()).toEqual("High-usage")
+    })
+  })
 })
