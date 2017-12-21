@@ -23,4 +23,9 @@ describe("Thermostat", function() {
     thermostat.down(11);
     expect(thermostat.temp).toEqual(10);
   });
+
+  it("can't go over the max temperature", function() {
+    thermostat.up(6);
+    expect(thermostat.temp).toEqual(25);
+  })
 })
