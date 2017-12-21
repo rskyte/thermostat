@@ -7,10 +7,11 @@ $(document).ready(function() {
 
   function updateCurrentTemperature() {
     $('#temperature').text("Current Temp: " + thermostat.temp)
+    $('#temperature').attr('class', thermostat.energyUsage());
+    $('#energy_usage').text("Current Energy Usage: " + thermostat.energyUsage())
   }
 
   updateCurrentTemperature()
-  $('#energy_usage').text("Current Energy Usage: " + thermostat.energyUsage())
   updatePowerSaveStatus()
 
   $('#powersave_off').click(function() {
