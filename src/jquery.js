@@ -40,5 +40,15 @@ $(document).ready(function() {
     updateCurrentTemperature()
   })
 
+  $("#submit_city").click(function() {
+    var city = document.getElementById("city").value;
+    $("#current_city").text("Current City: " + city);
+    $.get( `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=94ee09f461c4eefbb6b36f5ebb56f760`, function(data) {
+      $("#outside_temp").text("Outside Temp: " + Math.round(data.main.temp));
+    });
+  });
+
+
+
 
 })
